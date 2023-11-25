@@ -1,5 +1,6 @@
 import Worm from "./enemies/Worm.js"
 import Ghost from "./enemies/Ghost.js"
+import Spider from "./enemies/Spider.js"
 
 export default class Game{
   #ctx
@@ -16,9 +17,9 @@ export default class Game{
     this.#height = height
 
     this.#enemies = []
-    this.#enemyInterval = 1000
+    this.#enemyInterval = 500
     this.#enemyTimer = 0
-    this.#enemyTypes = ['worm', 'ghost']
+    this.#enemyTypes = ['worm', 'ghost', 'spider']
   }
 
   get width(){
@@ -37,6 +38,9 @@ export default class Game{
         break
       case 'ghost':
         this.#enemies.push(new Ghost(this))
+        break
+      case 'spider':
+        this.#enemies.push(new Spider(this))
         break
     }
   }
