@@ -1,9 +1,8 @@
 import Game from "./Game.js"
 
-const game = new Game()
-
 let canvas = null
 let ctx = null
+let game = null
 let lastTime = 0
 
 window.addEventListener('load', () => {
@@ -12,6 +11,8 @@ window.addEventListener('load', () => {
   canvas.width = 500
   canvas.height = 800
   
+  game = new Game(ctx, canvas.width, canvas.height)
+
   animate(0)
 })
 
@@ -22,7 +23,7 @@ function animate(timestamp){
   const deltaTime = timestamp - lastTime
   lastTime = timestamp
 
-  game.update()
+  game.update(deltaTime)
   game.draw(ctx)
 
   requestAnimationFrame(animate)

@@ -3,16 +3,27 @@ export default class Enemy{
   #y
   #width
   #height
+  #game
+  #markedForDeletion
   
-  constructor(){
-    this.#x = 100
-    this.#y = 100
+  constructor(game){
+    this.#game = game
+    this.#x = game.width
+    this.#y = Math.random() * game.height
     this.#width = 100
     this.#height = 100
+    this.#markedForDeletion = false
+  }
+
+  get markedForDeletion(){
+    return this.#markedForDeletion
   }
 
   update(){
     this.#x--
+    if(this.#x < -this.#width){
+      this.#markedForDeletion = true
+    }
   }
 
   draw(ctx){
