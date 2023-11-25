@@ -1,4 +1,4 @@
-import Enemy from "./Enemy.js"
+import Worm from "./enemies/Worm.js"
 
 export default class Game{
   #ctx
@@ -14,7 +14,7 @@ export default class Game{
     this.#height = height
 
     this.#enemies = []
-    this.#enemyInterval = 5000
+    this.#enemyInterval = 1000
     this.#enemyTimer = 0
   }
 
@@ -26,7 +26,8 @@ export default class Game{
   }
 
   #addNewEnemy(){
-    this.#enemies.push(new Enemy(this))
+    this.#enemies.push(new Worm(this))
+    this.#enemies.sort((a,b) => a.y - b.y)
   }
 
   update(deltaTime){
@@ -37,7 +38,7 @@ export default class Game{
     }
 
     this.#enemies = this.#enemies.reduce((prev, curr) => {
-      curr.update()
+      curr.update(deltaTime)
       return curr.markedForDeletion ? prev : [...prev, curr]
     }, [])
   }
