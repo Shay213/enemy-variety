@@ -18,6 +18,7 @@ export default class Spider extends Enemy{
 
   update(deltaTime){
     super.update(deltaTime)
+    if(this.y < -(this.height * 2)) this.markedForDeletion = true
     this.y += this.vy * deltaTime
     if(this.y > this.maxLength) this.vy *= -1
   }
