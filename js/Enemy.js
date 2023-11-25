@@ -1,9 +1,8 @@
 export default class Enemy{
-  #game
   #markedForDeletion
   
   constructor(game){
-    this.#game = game
+    this.game = game
     this.#markedForDeletion = false
   }
 

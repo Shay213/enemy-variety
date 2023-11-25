@@ -1,4 +1,5 @@
 import Worm from "./enemies/Worm.js"
+import Ghost from "./enemies/Ghost.js"
 
 export default class Game{
   #ctx
@@ -7,6 +8,7 @@ export default class Game{
   #enemies
   #enemyInterval
   #enemyTimer
+  #enemyTypes
 
   constructor(ctx, width, height){
     this.#ctx = ctx
@@ -16,6 +18,7 @@ export default class Game{
     this.#enemies = []
     this.#enemyInterval = 1000
     this.#enemyTimer = 0
+    this.#enemyTypes = ['worm', 'ghost']
   }
 
   get width(){
@@ -26,8 +29,16 @@ export default class Game{
   }
 
   #addNewEnemy(){
-    this.#enemies.push(new Worm(this))
-    this.#enemies.sort((a,b) => a.y - b.y)
+    const randomEnemy = this.#enemyTypes[Math.floor(Math.random() * this.#enemyTypes.length)]
+
+    switch(randomEnemy){
+      case 'worm':
+        this.#enemies.push(new Worm(this))
+        break
+      case 'ghost':
+        this.#enemies.push(new Ghost(this))
+        break
+    }
   }
 
   update(deltaTime){
